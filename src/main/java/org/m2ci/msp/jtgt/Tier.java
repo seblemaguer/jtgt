@@ -97,6 +97,31 @@ public abstract class Tier {
     }
 
     /**
+     * Get the list of annotations which are in a specific interval
+     *
+     * @param start the beginning of the interval
+     * @param end the end of the interval
+     * @return the list of annotations which are in the described interval
+     */
+    public ArrayList<Annotation> getAnnotationsBetween(double start, double end) {
+        ArrayList<Annotation> annotations = new ArrayList<Annotation>();
+        for (Annotation an: getAnnotations()) {
+
+            // We passed the end => get away
+            if (an.getEnd() > end) {
+                break;
+            }
+
+            // Add the annotation if start is passed
+            if (an.getStart() >= start) {
+                annotations.add(an);
+            }
+        }
+
+        return annotations;
+    }
+
+    /**
      * Set the start time of the tier
      *
      * @param start the start time of the tier
