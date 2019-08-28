@@ -104,11 +104,23 @@ public abstract class Tier {
      * @return the list of annotations which are in the described interval
      */
     public ArrayList<Annotation> getAnnotationsBetween(double start, double end) {
+        return getAnnotationsBetween(start, end, 0.0);
+    }
+
+    /**
+     * Get the list of annotations which are in a specific interval
+     *
+     * @param start the beginning of the interval
+     * @param end the end of the interval
+     * @param eps the epislon to deal with rounding problem
+     * @return the list of annotations which are in the described interval
+     */
+    public ArrayList<Annotation> getAnnotationsBetween(double start, double end, double eps) {
         ArrayList<Annotation> annotations = new ArrayList<Annotation>();
         for (Annotation an: getAnnotations()) {
 
             // We passed the end => get away
-            if (an.getEnd() > end) {
+            if ((an.getStart()+eps) > end) {
                 break;
             }
 
